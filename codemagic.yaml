@@ -1,17 +1,12 @@
-version: 2.0
-
 workflows:
-  build:
-    name: Build iOS App
+  ios:
+    name: iOS Build
     max_build_duration: 60
-    triggers:
-      - push:
-          branches:
-            include:
-              - main
+    instance_type: mac_mini
     scripts:
-      - name: Build
+      - name: Install dependencies
         script: |
-          xcodebuild -workspace YourWorkspace.xcworkspace -scheme YourScheme -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11' build
-    artifacts:
-      - build/Release-iphonesimulator/YourApp.app
+          brew install swiftlint
+      - name: Build and test
+        script: |
+          xcodebuild -workspace YourApp.xcworkspace -scheme YourApp -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11' build test
