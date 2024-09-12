@@ -1,7 +1,7 @@
 version: 2.0
 
 workflows:
-  ios-build:
+  build:
     name: Build iOS App
     max_build_duration: 60
     triggers:
@@ -10,10 +10,6 @@ workflows:
             include:
               - main
     scripts:
-      - name: Install dependencies
-        script: |
-          gem install bundler
-          bundle install
       - name: Build
         script: |
           xcodebuild -workspace YourWorkspace.xcworkspace -scheme YourScheme -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11' build
