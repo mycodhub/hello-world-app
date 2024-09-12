@@ -1,6 +1,7 @@
+version: 2.0
+
 workflows:
-  version: 2.0
-  build:
+  ios-build:
     name: Build iOS App
     max_build_duration: 60
     triggers:
